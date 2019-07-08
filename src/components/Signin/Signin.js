@@ -16,6 +16,7 @@ onPasswordChange =(event)=>{
 	this.setState({signinPassword:event.target.value})
 }
 onSubmitSignin=()=>{
+	//sending user's data to the BE
 	fetch('https://murmuring-escarpment-97453.herokuapp.com/signin',{
 		method:'post',
 		headers:{'Content-Type':'application/json'},

@@ -152,11 +152,13 @@ class App extends Component {
 
   claculateFaceLoacation=(data)=>{
     //using clarifai data to make a box around a face
-    const clarifaiFace=data.outputs[0].data.regions[0].region_info.bounding_box; 
+    //getting data from clarifai
+    const clarifaiFace=data.outputs[0].data.regions[0].region_info.bounding_box;
+    //selecting image 
     const image= document.getElementById('inputimage');
     const width = Number(image.width);
     const height = Number(image.height);
-
+    //creating border around the face
     return {
       leftCol: clarifaiFace.left_col * width,
       topRow: clarifaiFace.top_row * height,
@@ -219,18 +221,19 @@ class App extends Component {
     }
 
   render() {
+    const {isSignedIn,box,imgUrl,user,route}=this.state;
     return (
       <div className="App">
       <Particles className='particles' params={particlesOptions} /> 
-      <Navigation isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
+      <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
 
-      {this.state.route==='home'
+      {route==='home'
       ?
       <div>
           <Logo/>
-          <Rank name={this.state.user.name} entries={this.state.user.entries}/>
+          <Rank name={user.name} entries={user.entries}/>
           <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />      
-          <FaceRecognition box={this.state.box} imgUrl={this.state.imgUrl}/>
+          <FaceRecognition box={box} imgUrl={imgUrl}/>
       </div>
      :(
         this.state.route==='signin'

@@ -21,6 +21,7 @@ onPasswordChange =(event)=>{
 	this.setState({registerPassword:event.target.value})
 }
 onSubmitRegister=()=>{
+	//sendind user's data to the BE
 	fetch('https://murmuring-escarpment-97453.herokuapp.com/register',{
 		method:'post',
 		headers:{'Content-Type':'application/json'},
